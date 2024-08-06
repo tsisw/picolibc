@@ -133,7 +133,11 @@ __memcpy_aux:
 	.global	memcpy
 	.type	memcpy, @function
 memcpy:
+#ifndef CONFIG_XTENSA_TENSILICA_NX
 	leaf_entry sp, 16
+#else
+	leaf_entry sp, 32
+#endif
 	/* a2 = dst, a3 = src, a4 = len */
 
 	mov	a5, a2		// copy dst so that a2 is return value

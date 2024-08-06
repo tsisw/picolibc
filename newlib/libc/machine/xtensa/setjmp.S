@@ -69,8 +69,11 @@
 	.global	setjmp
 	.type	setjmp, @function
 setjmp:
+#ifndef CONFIG_XTENSA_TENSILICA_NX
 	entry	sp, 16
-
+#else
+	entry	sp, 32
+#endif
 	/* Flush registers.  */
 	mov	a4, a2			// save a2 (jmp_buf)
 	movi	a2, SYS_nop
@@ -135,7 +138,11 @@ setjmp:
 	.global	longjmp
 	.type	longjmp, @function
 longjmp:
+#ifndef CONFIG_XTENSA_TENSILICA_NX
 	entry	sp, 16
+#else
+	entry	sp, 32
+#endif
 	/*  a2 == &env, a3 == val  */
 
 #if XCHAL_MAYHAVE_ERRATUM_XEA1KWIN
@@ -148,11 +155,15 @@ longjmp:
 #endif
 	/* Invalidate all but the current window;
 	   set WindowStart to (1 << WindowBase).  */
+#ifndef CONFIG_XTENSA_TENSILICA_NX	
 	rsr	AR_WB, WINDOWBASE
+#endif
 	movi	a4, 1
 	ssl	AR_WB
 	sll	a4, a4
+#ifndef CONFIG_XTENSA_TENSILICA_NX
 	wsr	a4, WINDOWSTART
+#endif
 	rsync
 
 	/* Return to the return address of the setjmp, using the

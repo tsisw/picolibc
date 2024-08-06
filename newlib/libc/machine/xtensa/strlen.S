@@ -30,7 +30,11 @@
 	.global	strlen
 	.type	strlen, @function
 strlen:
+#ifndef CONFIG_XTENSA_TENSILICA_NX	
 	leaf_entry sp, 16
+#else
+	leaf_entry sp, 32
+#endif
 	/* a2 = s */
 
 	addi	a3, a2, -4	// because we overincrement at the end

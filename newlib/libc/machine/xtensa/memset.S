@@ -110,7 +110,11 @@ __memset_aux:
 	.global	memset
 	.type	memset, @function
 memset:
+#ifndef CONFIG_XTENSA_TENSILICA_NX
 	leaf_entry sp, 16
+#else
+	leaf_entry sp, 32
+#endif
 	/* a2 = dst, a3 = c, a4 = length */
 
 	/* Duplicate character into all bytes of word.  */

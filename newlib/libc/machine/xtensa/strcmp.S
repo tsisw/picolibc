@@ -40,8 +40,11 @@
 	.global	strcmp
 	.type	strcmp, @function
 strcmp:
-
+#ifndef CONFIG_XTENSA_TENSILICA_NX
 	leaf_entry sp, 16
+#else
+	leaf_entry sp, 32
+#endif
 	/* a2 = s1, a3 = s2 */
 
 	l8ui	a8, a2, 0	// byte 0 from s1

@@ -30,7 +30,11 @@
 	.global	strcpy
 	.type	strcpy, @function
 strcpy:
+#ifndef CONFIG_XTENSA_TENSILICA_NX
 	leaf_entry sp, 16
+#else
+	leaf_entry sp, 32
+#endif
 	/* a2 = dst, a3 = src */
 
 	mov	a10, a2		// leave dst in return value register
