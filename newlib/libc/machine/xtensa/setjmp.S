@@ -53,7 +53,7 @@
 
    Much like other ABIs, this version just saves the necessary registers
    to the stack and restores them later.  Much less needs to be done.  */
-#ifndef  CONFIG_XTENSA_TENSILICA_NX
+#ifndef  XCHAL_HAVE_XEA3
 #include "xtensa-asm.h"
 
 #define SYS_nop	0
@@ -69,7 +69,7 @@
 	.global	setjmp
 	.type	setjmp, @function
 setjmp:
-#ifndef CONFIG_XTENSA_TENSILICA_NX
+#ifndef XCHAL_HAVE_XEA3
 	entry	sp, 16
 #else
 	entry	sp, 32
@@ -138,7 +138,7 @@ setjmp:
 	.global	longjmp
 	.type	longjmp, @function
 longjmp:
-#ifndef CONFIG_XTENSA_TENSILICA_NX
+#ifndef XCHAL_HAVE_XEA3
 	entry	sp, 16
 #else
 	entry	sp, 32
@@ -155,13 +155,13 @@ longjmp:
 #endif
 	/* Invalidate all but the current window;
 	   set WindowStart to (1 << WindowBase).  */
-#ifndef CONFIG_XTENSA_TENSILICA_NX	
+#ifndef XCHAL_HAVE_XEA3	
 	rsr	AR_WB, WINDOWBASE
 #endif
 	movi	a4, 1
 	ssl	AR_WB
 	sll	a4, a4
-#ifndef CONFIG_XTENSA_TENSILICA_NX
+#ifndef XCHAL_HAVE_XEA3
 	wsr	a4, WINDOWSTART
 #endif
 	rsync
@@ -269,7 +269,7 @@ longjmp:
 	.size	longjmp, .-longjmp
 
 #endif /* CALL0 ABI */
-#else /* XEA3 : CONFIG_XTENSA_TENSILICA_NX */
+#else /* XEA3 : XCHAL_HAVE_XEA3 */
 #include "xtensa-asm.h"
 
 #include <xtensa/tie/xt_virtualops.h>

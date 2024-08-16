@@ -20,7 +20,7 @@
    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
-#ifndef CONFIG_XTENSA_TENSILICA_NX
+#ifndef XCHAL_HAVE_XEA3
 #include "xtensa-asm.h"
 
 	.text
@@ -30,7 +30,7 @@
 	.global	strlen
 	.type	strlen, @function
 strlen:
-#ifndef CONFIG_XTENSA_TENSILICA_NX	
+#ifndef XCHAL_HAVE_XEA3	
 	leaf_entry sp, 16
 #else
 	leaf_entry sp, 32
@@ -118,7 +118,7 @@ strlen:
 
 	.size	strlen, . - strlen
 
-#else /* XEA3 : CONFIG_XTENSA_TENSILICA_NX */
+#else /* XEA3 : XCHAL_HAVE_XEA3 */
 #include "xtensa-asm.h"
 #include <xtensa/tie/xt_virtualops.h>
 #ifdef XT_ADDI_A

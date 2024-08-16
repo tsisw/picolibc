@@ -20,7 +20,7 @@
    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
-#ifndef CONFIG_XTENSA_TENSILICA_NX
+#ifndef XCHAL_HAVE_XEA3
 #include "xtensa-asm.h"
 
 /* void *memset (void *dst, int c, size_t length)
@@ -110,7 +110,7 @@ __memset_aux:
 	.global	memset
 	.type	memset, @function
 memset:
-#ifndef CONFIG_XTENSA_TENSILICA_NX
+#ifndef XCHAL_HAVE_XEA3
 	leaf_entry sp, 16
 #else
 	leaf_entry sp, 32
@@ -196,7 +196,7 @@ memset:
 
 	.size	memset, . - memset
 
-#else /*XEA3 : CONFIG_XTENSA_TENSILICA_NX */
+#else /*XEA3 : XCHAL_HAVE_XEA3 */
 #include "xtensa-asm.h"
 
 #include <xtensa/tie/xt_virtualops.h>

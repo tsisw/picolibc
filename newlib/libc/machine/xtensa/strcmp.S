@@ -20,7 +20,7 @@
    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  */
-#ifndef CONFIG_XTENSA_TENSILICA_NX
+#ifndef XCHAL_HAVE_XEA3
 #include "xtensa-asm.h"
 
 #define MASK4 0x40404040
@@ -40,7 +40,7 @@
 	.global	strcmp
 	.type	strcmp, @function
 strcmp:
-#ifndef CONFIG_XTENSA_TENSILICA_NX
+#ifndef XCHAL_HAVE_XEA3
 	leaf_entry sp, 16
 #else
 	leaf_entry sp, 32
@@ -354,7 +354,7 @@ strcmp:
 #endif /* !__XTENSA_EB */
 
 	.size	strcmp, . - strcmp
-#else /* XEA3 : CONFIG_XTENSA_TENSILICA_NX*/
+#else /* XEA3 : XCHAL_HAVE_XEA3*/
 #include "xtensa-asm.h"
 #include <xtensa/tie/xt_virtualops.h>
 
